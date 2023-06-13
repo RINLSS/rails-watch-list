@@ -1,0 +1,21 @@
+<div class="col-8 mx-auto">
+<%= link_to "Back to lists", lists_path %>
+    <%= link_to 'Delete entire list', list_path(@list), data: {
+      turbo_method: 'delete',
+      turbo_confirm: 'are u sure?'
+    } %>
+  <%= link_to "Add Movie", new_list_bookmark_path(@list) %>
+
+  <div class="col-8 mx-auto">
+  <% @bookmark = @list.bookmarks.each do |bookmark| %>
+    <%= bookmark.movie.title %>
+    <img width=200px src="<%= bookmark.movie.poster_url %>" alt="">
+    <%= bookmark.movie.overview %>
+    <%= bookmark.movie.rating %>
+    <%= link_to "Remove", bookmark_path(bookmark), data: {
+      turbo_method: 'delete',
+      turbo_confirm: 'are u sure?'
+     } %>
+  <% end %>
+  </div>
+</div>
